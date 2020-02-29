@@ -1,0 +1,55 @@
+var express=require('express');
+var router=express.Router();
+var customer_router=require('../model/customer_model');
+router.get('/',function(req,res,next){
+    customer_router.getAllcustomer(function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    })
+}),
+router.post('/',function(req,res,next){
+    customer_router.addcustomer(req.body,function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    })
+}),
+router.get('/:customer_id',function(req,res,next){
+    customer_router.getcustomerbyid(req.params.customer_id,function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    })
+}),
+router.put('/:customer_id',function(req,res,next){
+    customer_router.updatecustomer(req.params.customer_id,req.body,function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    }) 
+}), 
+router.delete('/:customer_id',function(req,res,next){
+    customer_router.deletecustomer(req.params.customer_id,function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    })
+}),
+
+module.exports=router;

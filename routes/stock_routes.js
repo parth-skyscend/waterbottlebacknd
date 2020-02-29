@@ -1,0 +1,54 @@
+var express=require('express');
+var router=express.Router();
+var stock_router=require('../model/stock_model');
+router.get('/',function(req,res,next){
+   stock_router.getAllstock(function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    })
+}),
+router.delete('/:stock_id',function(req,res,next){
+    stock_router.deletestock(req.params.stock_id,function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    })
+}),
+router.post('/',function(req,res,next){
+    stock_router.addstock(req.body,function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    })
+}),
+router.get('/:stock_id',function(req,res,next){
+    stock_router.getstockbyid(req.params.stock_id,function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    })
+}),
+router.put('/:stock_id',function(req,res,next){
+    stock_router.updatestock(req.params.stock_id,req.body,function(err,rows){
+        if(err){
+            res.json(err);
+        }
+        else{
+            res.json(rows);
+        }
+    })
+}),
+module.exports=router;
